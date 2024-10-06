@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>web tech oblig1</title>
+    <link rel='stylesheet' href='../css/styles.css' />
+    <style>
+      .weather-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+      }
+
+      .weather-comp {
+        text-align: center;
+        font-size: 1.5em;
+      }
+
+      .weather-comp h1 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="section_header padding-global">
+        <div class="container-medium">
+          <div class="header-comp">
+            <div class="header-logo">Header Logo</div>
+            <div class="header-link-container">
+              <a class="header-link" href="../index.html">Header link one (main)</a>
+              <a class="header-link" href="../json/index.html">Header link two (json)</a>
+              <a class="header-link" href="index.html">Header link three (weather)</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="weather-section padding-global">
+        <div class="container-medium">
+          <div class="weather-comp">
+            <h1>Weather from: <span id="location-name"></span>
+            </h1>
+            <div>Date and time: <span id="weather-time"></span> GMT </div>
+            <div>Temperature: <span id="weather-temp"></span>°C </div>
+            <div>Next update in: <span id="countdown">20</span> seconds </div>
+          </div>
+        </div>
+      </section>
+      <footer class="section-footer padding-global"> Copyright © </footer>
+    </main>
+    <script>
+      // places
+      const places = [{
+        name: 'Oslo',
+        latitude: 59.9133301,
+        longitude: 10.7389701
+      }, {
+        name: 'Gjøvik',
+        latitude: 60.8721617,
+        longitude: 10.5038864
+      }, {
+        name: 'Beitostølen',
+        latitude: 61.2487161,
+        longitude: 8.9062594
+      }, {
+        name: 'Karasjok',
+        latitude: 69.4718736,
+        longitude: 25.5111384
+      }, {
+        name: 'Kristiansand',
+        latitude: 58.0856276,
+        longitude: 7.931858
+      }, {
+        name: 'Trondheim',
+        latitude: 63.4304475,
+        longitude: 10.3952118
+      }];
+      // fetch weather data
+      async function fetchWeather(lat, lon) {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.current_weather;
+      }
+      // update the UI with weather information
+      function updateWeatherUI(weatherData, placeName) {
+        document.getElementById('location-name').textContent = placeName;
+        document.getElementById('weather-time').textContent = new Date(weatherData.time).toLocaleString();
+        document.getElementById('weather-temp').textContent = weatherData.temperature;
+      }
+      // start the countdown and update weather every 20 seconds
+      function startWeatherUpdates() {
+        const countdownElement = document.getElementById('countdown');
+        let countdown = 20;
+
+        function updateWeather() {
+          const randomPlace = places[Math.floor(Math.random() * places.length)];
+          fetchWeather(randomPlace.latitude, randomPlace.longitude).then(weatherData => updateWeatherUI(weatherData, randomPlace.name)).catch(error => console.error('Error fetching weather data:', error));
+        }
+        // updates countdown timer
+        function tick() {
+          countdown--;
+          countdownElement.textContent = countdown;
+          if (countdown === 0) {
+            countdown = 20;
+            updateWeather();
+          }
+        }
+        setInterval(tick, 1000);
+        updateWeather(); // initial update
+      }
+      // initialize the first fetch and countdown
+      startWeatherUpdates();
+    </script>
+  </body>
+</html>

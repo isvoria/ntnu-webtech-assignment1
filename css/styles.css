@@ -1,0 +1,157 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* base styles */
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    color: #232834;
+    line-height: 1.7;
+    font-weight: 300;
+    margin: 0;
+}
+
+main {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    line-height: 1;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* layout classes */
+.padding-global {
+    padding-right: 4rem;
+    padding-left: 4rem;
+}
+
+.container-medium {
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container-small {
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.padding-section-xl {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+.padding-section-large {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.padding-section-medium {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* header styles */
+.section_header {
+    background-color: #1f2935;
+    color: #fffefa;
+    border-bottom: 1px solid #2a3646;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.header-comp {
+    text-align: center;
+}
+
+.header-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+}
+
+.header-link-container {
+    display: flex;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+.header-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* button styles */
+.button-group {
+    display: flex;
+    margin-top: .5rem;
+    align-items: center;
+}
+
+.button {
+    background-color: #3882f4;
+    display: flex;
+    padding: 0.25rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #fffefa;
+    text-decoration: none;
+}
+
+.is-secondary {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #fffefa;
+    color: #fffefa;
+}
+
+
+/* footer section */
+.section-footer {
+    margin-top: auto;
+    background-color: #1f2935;
+    color: #fffefa;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* utility classes */
+.margin-0 {
+    margin: 0 !important;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
